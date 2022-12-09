@@ -1,4 +1,4 @@
-package t2;
+package tasks.t2;
 
 import java.util.LinkedHashMap;
 
