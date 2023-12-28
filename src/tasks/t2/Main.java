@@ -4,11 +4,14 @@ import java.util.LinkedHashMap;
 
 public class Main {
   public static void main(String[] args) {
-    var textToTest = "This is an example of a long text. Try to find here the first non-repeated character.";
-    var map = new LinkedHashMap<Character, Integer>();
-    textToTest.chars().forEach(value -> map.compute((char) value, (k, v) -> v == null ? 1 : ++v));
-    map.entrySet().stream()
-        .filter(entry-> entry.getValue().equals(1)).findFirst()
-        .ifPresent((characterIntegerEntry -> System.out.println(characterIntegerEntry.getKey())));
+    var arr = new String[10];
+    System.out.println(arr.getClass());
+    System.out.println(arr.getClass().componentType());
+    System.out.println(arr.getClass().arrayType());
+    switch ((Object)arr) {
+      case String[] s -> System.out.println(1);
+      case Integer i -> System.out.println(2);
+      default -> System.out.println(3);
+    }
   }
 }
