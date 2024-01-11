@@ -1,17 +1,36 @@
 package tasks.t2;
 
-import java.util.LinkedHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-  public static void main(String[] args) {
-    var arr = new String[10];
-    System.out.println(arr.getClass());
-    System.out.println(arr.getClass().componentType());
-    System.out.println(arr.getClass().arrayType());
-    switch ((Object)arr) {
-      case String[] s -> System.out.println(1);
-      case Integer i -> System.out.println(2);
-      default -> System.out.println(3);
-    }
+  public static void main(String[] args) throws InterruptedException {
+    var ob = new Main();
+    var t1 = new Thread(()-> {
+      try {
+        ob.m1();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+    });
+    var t2 = new Thread(()-> {
+      try {
+        ob.m1();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+    });
+
+    t1.start();
+    t2.start();
+  }
+
+  public synchronized void m1() throws InterruptedException {
+    System.out.println("We are in m1.");
+    Thread.sleep(10000);
+  }
+
+  public synchronized void m2() {
+    System.out.println("We are in m2.");
   }
 }
+
